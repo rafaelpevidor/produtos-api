@@ -25,6 +25,12 @@ import com.montreal.produtosapi.model.base.BaseEntity;
 @Table(name = "tb_produto")
 public class Produto implements BaseEntity {
 
+    public Produto() {}
+    
+    public Produto(String nome) {
+        this.nome = nome;
+    }
+    
     /**
      * 
      */

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.montreal.produtosapi.controller;
+package com.montreal.produtosapi.controller.rest;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -32,15 +32,15 @@ import com.montreal.produtosapi.model.repository.ProdutoRepository;
  */
 @RestController
 @RequestMapping("/api/produto")
-public class ProdutoController {
+public class ProdutoRestController {
     
-    private static final Logger LOG = Logger.getLogger(ProdutoController.class.getName());
+    private static final Logger LOG = Logger.getLogger(ProdutoRestController.class.getName());
     
     private final ProdutoRepository produtoRepository;
     private final ImagemRepository imagemRepository;
     
     @Autowired
-    public ProdutoController(ProdutoRepository produtoRepository, ImagemRepository imagemRepository) {
+    public ProdutoRestController(ProdutoRepository produtoRepository, ImagemRepository imagemRepository) {
         this.produtoRepository = produtoRepository;
         this.imagemRepository = imagemRepository;
     }

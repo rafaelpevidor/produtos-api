@@ -21,6 +21,13 @@ import com.montreal.produtosapi.model.base.BaseEntity;
 @Table(name = "tb_imagem")
 public class Imagem implements BaseEntity {
 
+    public Imagem() {}
+    
+    public Imagem(Produto produto, String tipo) {
+        this.produto = produto;
+        this.tipo = tipo;
+    }
+    
     /**
      * 
      */

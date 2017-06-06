@@ -1,6 +1,6 @@
  /* 
  */
-package com.montreal.produtosapi.controller;
+package com.montreal.produtosapi.controller.rest;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -24,14 +24,14 @@ import com.montreal.produtosapi.model.repository.ImagemRepository;
  */
 @RestController
 @RequestMapping("/api/imagem")
-public class ImagemController {
+public class ImagemRestController {
 
-    private static final Logger LOG = Logger.getLogger(ProdutoController.class.getName());
+    private static final Logger LOG = Logger.getLogger(ProdutoRestController.class.getName());
     
     private final ImagemRepository imagemRepository;
     
     @Autowired
-    public ImagemController(ImagemRepository imagemRepository) {
+    public ImagemRestController(ImagemRepository imagemRepository) {
         this.imagemRepository = imagemRepository;
     }
     

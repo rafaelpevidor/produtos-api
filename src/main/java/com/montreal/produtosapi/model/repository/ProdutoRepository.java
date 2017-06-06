@@ -20,18 +20,18 @@ import com.montreal.produtosapi.model.domain.Produto;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
-    @Query("SELECT p from Produto p JOIN FETCH p.imagens img")
+    @Query("SELECT p from Produto p LEFT JOIN FETCH p.imagens img")
     List<Produto> findAllWithImagens();
 
     Produto findByNome(String nome);
 
-    @Query("SELECT p from Produto p JOIN FETCH p.produtosFilhos pf")
+    @Query("SELECT p from Produto p LEFT JOIN FETCH p.produtosFilhos pf")
     List<Produto> findAllWithFilhos();
     
-    @Query("SELECT p from Produto p JOIN FETCH p.imagens img WHERE p.id = :id")
+    @Query("SELECT p from Produto p JOIN FETCH p.imagens JOIN p.imagens WHERE p.id = :id")
     Produto findOneWithImagens(@Param(value = "id") Long id);
     
-    @Query("SELECT p from Produto p JOIN FETCH p.produtosFilhos pf WHERE p.id = :id")
+    @Query("SELECT p from Produto p JOIN FETCH p.produtosFilhos JOIN p.produtosFilhos WHERE p.id = :id")
     Produto findOneWithFilhoss(@Param(value = "id") Long id);
 
     List<Produto> findByProdutoPai(Produto produtoPai);
