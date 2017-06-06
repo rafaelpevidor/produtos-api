@@ -3,9 +3,9 @@
 package com.montreal.produtosapi.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.montreal.produtosapi.model.domain.Imagem;
 import com.montreal.produtosapi.model.repository.ImagemRepository;
@@ -27,7 +26,9 @@ import com.montreal.produtosapi.model.repository.ImagemRepository;
 @RequestMapping("/api/imagem")
 public class ImagemController {
 
-private final ImagemRepository imagemRepository;
+    private static final Logger LOG = Logger.getLogger(ProdutoController.class.getName());
+    
+    private final ImagemRepository imagemRepository;
     
     @Autowired
     public ImagemController(ImagemRepository imagemRepository) {
@@ -36,13 +37,14 @@ private final ImagemRepository imagemRepository;
     
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Imagem>> findAll() {
+        LOG.info("Carregar imagens... ");
+        List<Imagem> imagens = imagemRepository.findAll();//.stream().map(ImagemDTO::new).collect(Collectors.toList());
+        imagens.add(new Imagem());
         
-        List<Imagem> imagems = imagemRepository.findAll();
-        
-        if (imagems.isEmpty())
+        if (imagens.isEmpty())
             return new ResponseEntity<List<Imagem>>(HttpStatus.NO_CONTENT);
         else
-            return new ResponseEntity<List<Imagem>>(imagems, HttpStatus.OK);
+            return new ResponseEntity<List<Imagem>>(imagens, HttpStatus.OK);
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -57,13 +59,11 @@ private final ImagemRepository imagemRepository;
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> add(@RequestBody Imagem imagem, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> add(@RequestBody Imagem imagem) {
         
         imagemRepository.save(imagem);
         
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/imagem/{id}").buildAndExpand(imagem.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)

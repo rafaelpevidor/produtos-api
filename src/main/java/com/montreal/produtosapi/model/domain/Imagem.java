@@ -11,13 +11,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.montreal.produtosapi.model.base.BaseEntity;
+
 /**
  * @author rafaelpevidor
  *
  */
 @Entity
 @Table(name = "tb_imagem")
-public class Imagem {
+public class Imagem implements BaseEntity {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 7948688105625391604L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

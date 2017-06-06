@@ -16,4 +16,9 @@ public enum ProdutoDependenciaEnum {
     public String getNome() {
         return name().toLowerCase();
     }
+    
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }

@@ -11,8 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.montreal.produtosapi.model.base.BaseEntity;
 
 /**
  * @author rafaelpevidor
@@ -20,7 +23,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_produto")
-public class Produto {
+public class Produto implements BaseEntity {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8497256318868348158L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +36,7 @@ public class Produto {
     
     private String nome;
     
+    @ManyToOne
     @JoinColumn(name = "produto_pai_id")
     private Produto produtoPai;
     
