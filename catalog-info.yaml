@@ -7,4 +7,3 @@ spec:
     type: openapi
     lifecycle: experimental
     owner: guest
-    system: produtos-api
